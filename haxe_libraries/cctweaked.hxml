@@ -1,0 +1,3 @@
+# @install: lix --silent download "gh://github.com/CCTweakedHaxePrograms/cctweaked-haxelib#f252f6d587469e65bc7c8d551bcb490c911e2b8c" into cctweaked/2.2.0/github/f252f6d587469e65bc7c8d551bcb490c911e2b8c
+-cp ${HAXE_LIBCACHE}/cctweaked/2.2.0/github/f252f6d587469e65bc7c8d551bcb490c911e2b8c/src
+-D cctweaked=2.2.0

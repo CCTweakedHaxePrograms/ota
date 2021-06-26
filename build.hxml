@@ -1,0 +1,4 @@
+-main Main
+-D lua-vanilla
+-lib cctweaked
+--lua s.lua
