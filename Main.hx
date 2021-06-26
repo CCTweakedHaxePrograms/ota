@@ -1,7 +1,7 @@
 import cc.Shell;
 
 function main() {
-    var args = Sys.args();
+    var args = [];//Sys.args();
     if (args.length == 0)
         throw "invalid num of arguments, needs a repository";
     var rep = args.shift();

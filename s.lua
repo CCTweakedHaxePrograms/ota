@@ -196,20 +196,19 @@ local Class = _hx_e();
 local Enum = _hx_e();
 
 local Array = _hx_e()
+__haxe_Exception = _hx_e()
+__lua_Boot = _hx_e()
+local String = _hx_e()
+__lua_Thread = _hx_e()
+__lua_UserData = _hx_e()
+__haxe_ValueException = _hx_e()
+local Std = _hx_e()
+__haxe_NativeStackTrace = _hx_e()
 ___Main_Main_Fields_ = _hx_e()
 local Math = _hx_e()
-local String = _hx_e()
-local Std = _hx_e()
-__haxe_Exception = _hx_e()
-__haxe_NativeStackTrace = _hx_e()
 __haxe__Rest_Rest_Impl_ = _hx_e()
-__haxe_ValueException = _hx_e()
 __haxe_iterators_ArrayIterator = _hx_e()
 __haxe_iterators_ArrayKeyValueIterator = _hx_e()
-__lua_Boot = _hx_e()
-__lua_UserData = _hx_e()
-__lua_PairTools = _hx_e()
-__lua_Thread = _hx_e()
 
 local _hx_bind, _hx_bit, _hx_staticToInstance, _hx_funcToField, _hx_maxn, _hx_print, _hx_apply_self, _hx_box_mr, _hx_bit_clamp, _hx_table, _hx_bit_raw
 local _hx_pcall_default = {};
@@ -541,57 +540,147 @@ end
 
 Array.prototype.__class__ =  Array
 
-___Main_Main_Fields_.new = {}
-___Main_Main_Fields_.__name__ = true
-___Main_Main_Fields_.main = function() 
-  local targs = __lua_PairTools.copy(_G.arg);
-  local length = nil;
-  local tab = __lua_PairTools.copy(targs);
-  local length = length;
-  local args;
-  if (length == nil) then 
-    length = _hx_table.maxn(tab);
-    if (length > 0) then 
-      local head = tab[1];
-      _G.table.remove(tab, 1);
-      tab[0] = head;
-      args = _hx_tab_array(tab, length);
-    else
-      args = _hx_tab_array({}, 0);
-    end;
+__haxe_Exception.new = function(message,previous,native) 
+  local self = _hx_new(__haxe_Exception.prototype)
+  __haxe_Exception.super(self,message,previous,native)
+  return self
+end
+__haxe_Exception.super = function(self,message,previous,native) 
+  self.__skipStack = 0;
+  self.__exceptionMessage = message;
+  self.__previousException = previous;
+  if (native ~= nil) then 
+    self.__nativeException = native;
+    self.__nativeStack = __haxe_NativeStackTrace.exceptionStack();
   else
-    args = _hx_tab_array(tab, length);
+    self.__nativeException = self;
+    self.__nativeStack = __haxe_NativeStackTrace.callStack();
+    self.__skipStack = 1;
   end;
-  local args = args;
-  if (args.length == 0) then 
-    _G.error(__haxe_Exception.thrown("invalid num of arguments, needs a repository"),0);
+end
+__haxe_Exception.__name__ = true
+__haxe_Exception.thrown = function(value) 
+  if (__lua_Boot.__instanceof(value, __haxe_Exception)) then 
+    do return value:get_native() end;
+  else
+    local e = __haxe_ValueException.new(value);
+    e.__skipStack = e.__skipStack + 1;
+    do return e end;
   end;
-  local rep = args:shift();
-  local url = "https://github.com/CCTweakedHaxePrograms/";
-  shell.run("wget", Std.string(url) .. Std.string(rep));
-  if (args.length > 1) then 
-    shell.run(rep, _hx_table.unpack(__haxe__Rest_Rest_Impl_.of(args)));
-  end;
+end
+__haxe_Exception.prototype = _hx_e();
+__haxe_Exception.prototype.get_native = function(self) 
+  do return self.__nativeException end
 end
 
-Math.new = {}
-Math.__name__ = true
-Math.isNaN = function(f) 
-  do return f ~= f end;
+__haxe_Exception.prototype.__class__ =  __haxe_Exception
+
+__lua_Boot.new = {}
+__lua_Boot.__name__ = true
+__lua_Boot.__instanceof = function(o,cl) 
+  if (cl == nil) then 
+    do return false end;
+  end;
+  local cl1 = cl;
+  if (cl1) == Array then 
+    do return __lua_Boot.isArray(o) end;
+  elseif (cl1) == Bool then 
+    do return _G.type(o) == "boolean" end;
+  elseif (cl1) == Dynamic then 
+    do return o ~= nil end;
+  elseif (cl1) == Float then 
+    do return _G.type(o) == "number" end;
+  elseif (cl1) == Int then 
+    if (_G.type(o) == "number") then 
+      do return _hx_bit_clamp(o) == o end;
+    else
+      do return false end;
+    end;
+  elseif (cl1) == String then 
+    do return _G.type(o) == "string" end;
+  elseif (cl1) == _G.table then 
+    do return _G.type(o) == "table" end;
+  elseif (cl1) == __lua_Thread then 
+    do return _G.type(o) == "thread" end;
+  elseif (cl1) == __lua_UserData then 
+    do return _G.type(o) == "userdata" end;else
+  if (((o ~= nil) and (_G.type(o) == "table")) and (_G.type(cl) == "table")) then 
+    local tmp;
+    if (__lua_Boot.__instanceof(o, Array)) then 
+      tmp = Array;
+    else
+      if (__lua_Boot.__instanceof(o, String)) then 
+        tmp = String;
+      else
+        local cl = o.__class__;
+        tmp = (function() 
+          local _hx_1
+          if (cl ~= nil) then 
+          _hx_1 = cl; else 
+          _hx_1 = nil; end
+          return _hx_1
+        end )();
+      end;
+    end;
+    if (__lua_Boot.extendsOrImplements(tmp, cl)) then 
+      do return true end;
+    end;
+    if ((function() 
+      local _hx_2
+      if (cl == Class) then 
+      _hx_2 = o.__name__ ~= nil; else 
+      _hx_2 = false; end
+      return _hx_2
+    end )()) then 
+      do return true end;
+    end;
+    if ((function() 
+      local _hx_3
+      if (cl == Enum) then 
+      _hx_3 = o.__ename__ ~= nil; else 
+      _hx_3 = false; end
+      return _hx_3
+    end )()) then 
+      do return true end;
+    end;
+    do return o.__enum__ == cl end;
+  else
+    do return false end;
+  end; end;
 end
-Math.isFinite = function(f) 
-  if (f > -_G.math.huge) then 
-    do return f < _G.math.huge end;
+__lua_Boot.isArray = function(o) 
+  if (_G.type(o) == "table") then 
+    if ((o.__enum__ == nil) and (_G.getmetatable(o) ~= nil)) then 
+      do return _G.getmetatable(o).__index == Array.prototype end;
+    else
+      do return false end;
+    end;
   else
     do return false end;
   end;
 end
-Math.min = function(a,b) 
-  if (Math.isNaN(a) or Math.isNaN(b)) then 
-    do return (0/0) end;
+__lua_Boot.extendsOrImplements = function(cl1,cl2) 
+  if ((cl1 == nil) or (cl2 == nil)) then 
+    do return false end;
   else
-    do return _G.math.min(a, b) end;
+    if (cl1 == cl2) then 
+      do return true end;
+    else
+      if (cl1.__interfaces__ ~= nil) then 
+        local intf = cl1.__interfaces__;
+        local _g = 1;
+        local _g1 = _hx_table.maxn(intf) + 1;
+        while (_g < _g1) do 
+          _g = _g + 1;
+          local i = _g - 1;
+          if (__lua_Boot.extendsOrImplements(intf[i], cl2)) then 
+            do return true end;
+          end;
+        end;
+      end;
+    end;
   end;
+  do return __lua_Boot.extendsOrImplements(cl1.__super__, cl2) end;
 end
 
 String.new = function(string) 
@@ -775,6 +864,28 @@ end
 
 String.prototype.__class__ =  String
 
+__lua_Thread.new = {}
+__lua_Thread.__name__ = true
+
+__lua_UserData.new = {}
+__lua_UserData.__name__ = true
+
+__haxe_ValueException.new = function(value,previous,native) 
+  local self = _hx_new(__haxe_ValueException.prototype)
+  __haxe_ValueException.super(self,value,previous,native)
+  return self
+end
+__haxe_ValueException.super = function(self,value,previous,native) 
+  __haxe_Exception.super(self,Std.string(value),previous,native);
+  self.value = value;
+end
+__haxe_ValueException.__name__ = true
+__haxe_ValueException.prototype = _hx_e();
+
+__haxe_ValueException.prototype.__class__ =  __haxe_ValueException
+__haxe_ValueException.__super__ = __haxe_Exception
+setmetatable(__haxe_ValueException.prototype,{__index=__haxe_Exception.prototype})
+
 Std.new = {}
 Std.__name__ = true
 Std.string = function(s) 
@@ -787,41 +898,6 @@ Std.int = function(x)
     do return _hx_bit_clamp(x) end;
   end;
 end
-
-__haxe_Exception.new = function(message,previous,native) 
-  local self = _hx_new(__haxe_Exception.prototype)
-  __haxe_Exception.super(self,message,previous,native)
-  return self
-end
-__haxe_Exception.super = function(self,message,previous,native) 
-  self.__skipStack = 0;
-  self.__exceptionMessage = message;
-  self.__previousException = previous;
-  if (native ~= nil) then 
-    self.__nativeException = native;
-    self.__nativeStack = __haxe_NativeStackTrace.exceptionStack();
-  else
-    self.__nativeException = self;
-    self.__nativeStack = __haxe_NativeStackTrace.callStack();
-    self.__skipStack = 1;
-  end;
-end
-__haxe_Exception.__name__ = true
-__haxe_Exception.thrown = function(value) 
-  if (__lua_Boot.__instanceof(value, __haxe_Exception)) then 
-    do return value:get_native() end;
-  else
-    local e = __haxe_ValueException.new(value);
-    e.__skipStack = e.__skipStack + 1;
-    do return e end;
-  end;
-end
-__haxe_Exception.prototype = _hx_e();
-__haxe_Exception.prototype.get_native = function(self) 
-  do return self.__nativeException end
-end
-
-__haxe_Exception.prototype.__class__ =  __haxe_Exception
 
 __haxe_NativeStackTrace.new = {}
 __haxe_NativeStackTrace.__name__ = true
@@ -862,6 +938,41 @@ __haxe_NativeStackTrace.exceptionStack = function()
   do return _hx_tab_array({}, 0) end;
 end
 
+___Main_Main_Fields_.new = {}
+___Main_Main_Fields_.__name__ = true
+___Main_Main_Fields_.main = function() 
+  local args = _hx_tab_array({}, 0);
+  if (args.length == 0) then 
+    _G.error(__haxe_Exception.thrown("invalid num of arguments, needs a repository"),0);
+  end;
+  local rep = args:shift();
+  local url = "https://github.com/CCTweakedHaxePrograms/";
+  shell.run("wget", Std.string(url) .. Std.string(rep));
+  if (args.length > 1) then 
+    shell.run(rep, _hx_table.unpack(__haxe__Rest_Rest_Impl_.of(args)));
+  end;
+end
+
+Math.new = {}
+Math.__name__ = true
+Math.isNaN = function(f) 
+  do return f ~= f end;
+end
+Math.isFinite = function(f) 
+  if (f > -_G.math.huge) then 
+    do return f < _G.math.huge end;
+  else
+    do return false end;
+  end;
+end
+Math.min = function(a,b) 
+  if (Math.isNaN(a) or Math.isNaN(b)) then 
+    do return (0/0) end;
+  else
+    do return _G.math.min(a, b) end;
+  end;
+end
+
 __haxe__Rest_Rest_Impl_.new = {}
 __haxe__Rest_Rest_Impl_.__name__ = true
 __haxe__Rest_Rest_Impl_.of = function(array) 
@@ -876,22 +987,6 @@ __haxe__Rest_Rest_Impl_.of = function(array)
   local this1 = ret;
   do return this1 end;
 end
-
-__haxe_ValueException.new = function(value,previous,native) 
-  local self = _hx_new(__haxe_ValueException.prototype)
-  __haxe_ValueException.super(self,value,previous,native)
-  return self
-end
-__haxe_ValueException.super = function(self,value,previous,native) 
-  __haxe_Exception.super(self,Std.string(value),previous,native);
-  self.value = value;
-end
-__haxe_ValueException.__name__ = true
-__haxe_ValueException.prototype = _hx_e();
-
-__haxe_ValueException.prototype.__class__ =  __haxe_ValueException
-__haxe_ValueException.__super__ = __haxe_Exception
-setmetatable(__haxe_ValueException.prototype,{__index=__haxe_Exception.prototype})
 
 __haxe_iterators_ArrayIterator.new = function(array) 
   local self = _hx_new(__haxe_iterators_ArrayIterator.prototype)
@@ -931,128 +1026,6 @@ __haxe_iterators_ArrayKeyValueIterator.__name__ = true
 __haxe_iterators_ArrayKeyValueIterator.prototype = _hx_e();
 
 __haxe_iterators_ArrayKeyValueIterator.prototype.__class__ =  __haxe_iterators_ArrayKeyValueIterator
-
-__lua_Boot.new = {}
-__lua_Boot.__name__ = true
-__lua_Boot.__instanceof = function(o,cl) 
-  if (cl == nil) then 
-    do return false end;
-  end;
-  local cl1 = cl;
-  if (cl1) == Array then 
-    do return __lua_Boot.isArray(o) end;
-  elseif (cl1) == Bool then 
-    do return _G.type(o) == "boolean" end;
-  elseif (cl1) == Dynamic then 
-    do return o ~= nil end;
-  elseif (cl1) == Float then 
-    do return _G.type(o) == "number" end;
-  elseif (cl1) == Int then 
-    if (_G.type(o) == "number") then 
-      do return _hx_bit_clamp(o) == o end;
-    else
-      do return false end;
-    end;
-  elseif (cl1) == String then 
-    do return _G.type(o) == "string" end;
-  elseif (cl1) == _G.table then 
-    do return _G.type(o) == "table" end;
-  elseif (cl1) == __lua_Thread then 
-    do return _G.type(o) == "thread" end;
-  elseif (cl1) == __lua_UserData then 
-    do return _G.type(o) == "userdata" end;else
-  if (((o ~= nil) and (_G.type(o) == "table")) and (_G.type(cl) == "table")) then 
-    local tmp;
-    if (__lua_Boot.__instanceof(o, Array)) then 
-      tmp = Array;
-    else
-      if (__lua_Boot.__instanceof(o, String)) then 
-        tmp = String;
-      else
-        local cl = o.__class__;
-        tmp = (function() 
-          local _hx_1
-          if (cl ~= nil) then 
-          _hx_1 = cl; else 
-          _hx_1 = nil; end
-          return _hx_1
-        end )();
-      end;
-    end;
-    if (__lua_Boot.extendsOrImplements(tmp, cl)) then 
-      do return true end;
-    end;
-    if ((function() 
-      local _hx_2
-      if (cl == Class) then 
-      _hx_2 = o.__name__ ~= nil; else 
-      _hx_2 = false; end
-      return _hx_2
-    end )()) then 
-      do return true end;
-    end;
-    if ((function() 
-      local _hx_3
-      if (cl == Enum) then 
-      _hx_3 = o.__ename__ ~= nil; else 
-      _hx_3 = false; end
-      return _hx_3
-    end )()) then 
-      do return true end;
-    end;
-    do return o.__enum__ == cl end;
-  else
-    do return false end;
-  end; end;
-end
-__lua_Boot.isArray = function(o) 
-  if (_G.type(o) == "table") then 
-    if ((o.__enum__ == nil) and (_G.getmetatable(o) ~= nil)) then 
-      do return _G.getmetatable(o).__index == Array.prototype end;
-    else
-      do return false end;
-    end;
-  else
-    do return false end;
-  end;
-end
-__lua_Boot.extendsOrImplements = function(cl1,cl2) 
-  if ((cl1 == nil) or (cl2 == nil)) then 
-    do return false end;
-  else
-    if (cl1 == cl2) then 
-      do return true end;
-    else
-      if (cl1.__interfaces__ ~= nil) then 
-        local intf = cl1.__interfaces__;
-        local _g = 1;
-        local _g1 = _hx_table.maxn(intf) + 1;
-        while (_g < _g1) do 
-          _g = _g + 1;
-          local i = _g - 1;
-          if (__lua_Boot.extendsOrImplements(intf[i], cl2)) then 
-            do return true end;
-          end;
-        end;
-      end;
-    end;
-  end;
-  do return __lua_Boot.extendsOrImplements(cl1.__super__, cl2) end;
-end
-
-__lua_UserData.new = {}
-__lua_UserData.__name__ = true
-
-__lua_PairTools.new = {}
-__lua_PairTools.__name__ = true
-__lua_PairTools.copy = function(table1) 
-  local ret = ({});
-  for k,v in _G.pairs(table1) do ret[k] = v end;
-  do return ret end;
-end
-
-__lua_Thread.new = {}
-__lua_Thread.__name__ = true
 if _hx_bit_raw then
     _hx_bit_clamp = function(v)
     if v <= 2147483647 and v >= -2147483648 then
