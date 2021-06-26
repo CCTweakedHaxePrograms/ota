@@ -7,4 +7,7 @@ function main() {
     var rep = args.shift();
     var url = "https://github.com/CCTweakedHaxePrograms/";
     Shell.run("wget",url + rep);
-}
+    if (args.length > 1) {
+        Shell.run(rep,...args);
+    }
+} 
